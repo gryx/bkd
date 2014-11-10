@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Cell</title>
+<link type="text/css" rel="stylesheet" href="fpdf.css">
+</head>
+<body>
+<h1>Cell</h1>
+<code>Cell(<b>float</b> w [, <b>float</b> h [, <b>string</b> txt [, <b>mixed</b> border [, <b>int</b> ln [, <b>string</b> align [, <b>boolean</b> fill [, <b>mixed</b> link]]]]]]])</code>
+<h2>Deskripsi</h2>
+Membuat sel (area berbentuk kotak)  dengan pilihan garis pembatas (<em>border</em>), warna latar (<em>background</em>) dan teks. Pojok kiri atas sel menunjukkan posisi sekarang. Teks dapat diatur perataannya. Setelah metode ini dipanggil, posisi sekarang berpindah ke kanan atau ke baris berikutnya. Anda juga bisa memberikan/memasukkan link ke dalam teks.
+<br>
+Jika perpindahan halaman otomatis aktif dan sel melewati batas, maka perpindahan halaman akan dilakukan terlebih dahulu sebelum menampilkan sel.
+<h2>Parameter</h2>
+<dl class="param">
+<dt><code>w</code></dt>
+<dd>
+Lebar sel. Jika nilainya <code>0</code>, sel akan melebar ke margin kanan.
+</dd>
+<dt><code>h</code></dt>
+<dd>
+Tinggi sel. Nilai default: <code>0</code>.
+</dd>
+<dt><code>txt</code></dt>
+<dd>
+Teks yang akan ditampilkan. Nilai default: teks kosong.
+</dd>
+<dt><code>border</code></dt>
+<dd>
+Menunjukkan apakah pembatas sel (bingkai) akan ditampilkan atau tidak. Nilainya adalah:
+<ul>
+<li><code>0</code>: tidak menampilkan pembatas</li>
+<li><code>1</code>: menampilkan pembatas</li>
+</ul>
+atau string dengan karakter berikut (urutan bebas):
+<ul>
+<li><code>L</code>: kiri</li>
+<li><code>T</code>: atas</li>
+<li><code>R</code>: kanan</li>
+<li><code>B</code>: bawah</li>
+</ul>
+Nilai default: <code>0</code>.
+</dd>
+<dt><code>ln</code></dt>
+<dd>
+Menunjukkan kemana posisi akan berpindah setelah proses membuat sel selesai. Nilainya adalah:
+<ul>
+<li><code>0</code>: ke kanan</li>
+<li><code>1</code>: ke awal baris berikutnya</li>
+<li><code>2</code>: ke bawah</li>
+</ul>
+Memberikan nilai <code>1</code> sama dengan memberikan nilai <code>0</code> dan memanggil Ln() setelahnya.
+Nilai default: <code>0</code>.
+</dd>
+<dt><code>align</code></dt>
+<dd>
+Jenis perataan teks dalam sel. Nilainya adalah:
+<ul>
+<li><code>L</code> atau string kosong: rata kiri (nilai default)</li>
+<li><code>C</code>: rata tengah</li>
+<li><code>R</code>: rata kanan</li>
+</ul>
+</dd>
+<dt><code>fill</code></dt>
+<dd>
+Menentukan apakah latar belakang sel ditampilkan (<code>true</code>) atau transparan (<code>false</code>).
+Nilai default: <code>false</code>.
+</dd>
+<dt><code>link</code></dt>
+<dd>
+URL atau nilai identitas yang dikembalikan oleh AddLink().
+</dd>
+</dl>
+<h2>Contoh</h2>
+<div class="doc-source">
+<pre><code>//Mengeset font
+$pdf-&gt;SetFont('Arial','B',16);
+//Geser 8 cm ke kanan
+$pdf-&gt;Cell(80);
+//Membuat sel 20*10 mm dengan teks rata tengah dan ganti baris
+$pdf-&gt;Cell(20,10,'Title',1,1,'C');</code></pre>
+</div>
+<h2>Lihat juga</h2>
+<a href="setfont.htm">SetFont()</a>,
+<a href="setdrawcolor.htm">SetDrawColor()</a>,
+<a href="setfillcolor.htm">SetFillColor()</a>,
+<a href="settextcolor.htm">SetTextColor()</a>,
+<a href="setlinewidth.htm">SetLineWidth()</a>,
+<a href="addlink.htm">AddLink()</a>,
+<a href="ln.htm">Ln()</a>,
+<a href="multicell.htm">MultiCell()</a>,
+<a href="write.htm">Write()</a>,
+<a href="setautopagebreak.htm">SetAutoPageBreak()</a>.
+<hr style="margin-top:1.5em">
+<div style="text-align:center"><a href="index.htm">Indeks</a></div>
+</body>
+</html>

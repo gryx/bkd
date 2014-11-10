@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Output</title>
+<link type="text/css" rel="stylesheet" href="fpdf.css">
+</head>
+<body>
+<h1>Output</h1>
+<code><b>string</b> Output([<b>string</b> name, <b>string</b> dest])</code>
+<h2>Deskripsi</h2>
+Mengirim dokumen ke tujuan yang ditentukan: <em>browser</em>, file atau string. Dalam hal dikirim ke browser, <em>plug-in</em> dapat digunakan (jika ada) atau <em>download</em> (kotak dialog "<em>Save as</em>") dapat ditampilkan.
+<br>
+Metode ini akan memanggil Close() terlebih dahulu jika perlu untuk mengakhiri dokumen.
+<h2>Parameter</h2>
+<dl class="param">
+<dt><code>name</code></dt>
+<dd>
+Nama file. Jika tidak ditentukan, dokumen akan dikirim ke browser (tujuan <code>I</code>) dengan nama <code>doc.pdf</code>.
+</dd>
+<dt><code>dest</code></dt>
+<dd>
+Tujuan pengiriman dokumen. Nilainya adalah:
+<ul>
+<li><code>I</code>: mengirim file langsung ke browser (<em>inline</em>). Plug-in akan digunakan jika ada.
+Nama yang diberikan oleh <code>name</code> digunakan jika <em>user</em> memilih "Save as" pada link yang menghasilkan PDF.</li>
+<li><code>D</code>: mengirim file ke browser dan <em>memaksa</em> download file dengan nama yang diberikan oleh <code>name</code>.</li>
+<li><code>F</code>: menyimpan file lokal dengan nama yang diberikan oleh <code>name</code> (dapat menyertakan path).</li>
+<li><code>S</code>: mengembalikan dokumen sebagai string. <code>name</code> diabaikan.</li>
+</ul>
+</dd>
+</dl>
+<h2>Lihat juga</h2>
+<a href="close.htm">Close()</a>.
+<hr style="margin-top:1.5em">
+<div style="text-align:center"><a href="index.htm">Indeks</a></div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+        Small flash application for demonstrating callbacks from the PDF
+        viewer with various argument types.
+        The "applicationComplete" attribute ensures consistent scaling
+        of the Flash application with the PDF page.
+-->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:mx="library://ns.adobe.com/flex/mx" 
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    creationComplete="initVars()"
+    applicationComplete="stage.scaleMode = StageScaleMode.EXACT_FIT;">
+    <fx:Script>
+        <![CDATA[
+            import mx.core.FlexGlobals;
+
+            [Bindable]
+            public var myTitle:String;
+            [Bindable]
+            public var myText:String;
+            
+            private function initVars():void {
+                myTitle = FlexGlobals.topLevelApplication.parameters.title;
+                if (myTitle == null)
+                    myTitle = "Mini Flash Example";
+                myText = FlexGlobals.topLevelApplication.parameters.text;
+                if (myText == null)
+                    myText = "PDFlib Flash Demo";
+
+                 ExternalInterface.addCallback("myCallbackVarargs",
+                                                myCallbackVarargs);
+
+                 ExternalInterface.addCallback("myCallbackTyped",
+                                                myCallbackTyped);
+            }
+        
+            // Callback with variable number of arguments. PDF objects passed
+            // as integers or floars don't come across properly.
+            public function myCallbackVarargs(title:String, ...rest):void {
+                myTitle = title;
+                myText = "";
+                for (var i : int = 0 ; i < rest.length ; i++ ) {
+                    if (rest[i] is Number) {
+                        myText += "[" + i + "] -> " + rest[i] + " (Number)\n";
+                    }
+                    else {
+                        myText += "[" + i + "] -> " + rest[i] + "\n";
+                    }
+                }
+             }
+        
+            // Callback with typed arguments. Floating point and integer number
+            // must be passed as string objects from the PDF side.
+            public function myCallbackTyped(title:String, myBoolean:Boolean,
+                        myNumber:Number, myInt:int, myString:String):void {
+                myTitle = title;
+                myText = "Boolean: " + myBoolean + "\n";
+                myText += "Number: " + myNumber + "\n";
+                myText += "int: " + myInt + "\n";
+                myText += "String: " + myString + "\n";
+             }
+        
+        ]]>
+    </fx:Script>
+    
+    <s:layout>
+        <s:VerticalLayout/>
+    </s:layout>
+
+    <s:Panel title="{myTitle}" fontWeight="bold" fontSize="24"
+                width="90%" height="90%">
+        <s:Label text="{myText}" fontWeight="bold" fontSize="12"
+                width="100%" height="100%"/>
+    </s:Panel>
+</s:Application>
+

@@ -1,0 +1,743 @@
+================================
+PDFlib 9.0.2 (December 17, 2013)
+================================
+
+- 2013-12-17 (bug #4627)
+  Setting an empty or NULL license key now results in an exception
+  "Invalid license key". Previously it triggered a full resource search
+  for a license file, which was undesired and undocumented behavior.
+
+- 2013-12-17 (bug #4631)
+  Improved performance in situations with large numbers of image or Form
+  XObject resources and many output pages. Most importantly this optimization
+  resulted in a significant performance boost when importing many PDF pages.
+ 
+- 2013-12-16 (bug #4632)
+  The following functions used parameter names x_1, y_1 etc. instead
+  of the documented names x1, y1 etc.:
+  PDF_circular_arc(), PDF_curveto(), PDF_rcurveto(), PDF_shading()
+  These have been changed to use the documented names. This requires
+  corresponding adjustments in Objective-C language clients.
+
+- 2013-12-12 (bug #4629)
+  The PDF/UA check in PDF_fit/info_pdi_page() incorrectly rejected documents
+  with H1, H2 etc. heading elements on the same level with the message
+  "Heading level 'H1' must not be skipped in weakly structured PDF/UA"
+  although this construct is allowed if the headings appear in the correct
+  order.
+
+
+==================================
+PDFlib 9.0.1p5 (December 06, 2013)
+==================================
+
+- 2013-12-06 (bug #4565)
+  Implemented Automatic Reference Counting (ARC) in the Objective-C
+  sample to reduce overall memory requirements of the sample application.
+
+- 2013-12-06 (feature #1630)
+  Although not explicitly forbidden in ISO 32000-1, nested Artifacts within
+  a structure element are considered incorrect. PDFlib now avoids this
+  construct by automatically suspending and resuming the currently active
+  structure element when an Artifact is created. Since this is not possible
+  for pseudo elements and Span, Quote, Note, Reference, BibEntry, Code
+  (with inline=true), Artifacts are no longer allowed if one of these
+  elements is active.
+
+- 2013-12-05 (bug #4612)
+  Due to improvements in the Java wrapper the "synchronized" keyword could
+  be removed from the internal new() and delete() methods. This results in
+  a significant speedup of applications with a large number of simultaneous
+  threads.
+
+- 2013-12-04 (feature #1649)
+  Implemented the "Placement" suboption for the "tag" option and
+  PDF_begin_item(). It helps in situations where a Figure element or
+  other ILSE is placed as direct child of a grouping element. The new
+  attribute avoids the "Possibly inappropriate use" warning in PAC 2.
+
+- 2013-12-04 (bug #4553)
+  PDF_fit_textflow() could emit leading spaces at the beginning of a line
+  if a space character appeared immediately after an inline option list.
+
+- 2013-12-03 (feature #1652)
+  Updated the iOS build with support for iOS 7, XCode 5, and ARM 64-bit.
+
+- 2013-12-03 (feature #1639)
+  PDF_open_pdi_page() now also imports the page transparency group by
+  default if one is present in an imported page. This behavior can be
+  controlled via the option "transparencygroup". The new keyword
+  transparencygroup=none has been introduced, and the behavior of this
+  option has been streamlined regarding PDF/A and PDF/X. Finally, some
+  documentation bugs regarding this option have been fixed.
+
+- 2013-12-02 (feature #1660 and feature #1661)
+  Tested PDFlib kernel and all relevant language bindings with Windows Server
+  2012 R2 and Windows 8.1. These systems are now part of the list of
+  supported platforms.
+
+- 2013-11-29 (bug #4620)
+  Text output with activated OpenType features and PDF_info_font() with
+  the keyword "featurelist" could emit an incorrect error message
+  "Font 'X': Tried to allocate 0 bytes in function tt_get_ligat_subst_format1"
+  for OpenType fonts where the number of ligature components in the GSUB
+  ligature substitution lookup table (format 1) was larger than the actual
+  number of available components in the subtable.
+
+- 2013-11-28 (bug #4613)
+  The XMP parser could confuse properties with the same name, but different
+  namespace. This could especially affect the PDF/A identifier in the presence
+  of a PDF/UA identifier, resulting in wrong values for the "pdfa" pCOS
+  pseudo object.
+  As a side effect of the change, non-conforming PDF/A documents with a
+  wrong namespace URI are no longer treated as PDF/A.
+
+- 2013-11-28 (bug #4614)
+  PDF_elliptical_arc() emitted an incorrect warning
+  "Floating point parameter 'x_1' has bad value (not a number)"
+  when the supplied end point (x, y) coincided with the current point.
+  Now this situation is silently ignored.
+
+- 2013-11-25 (bug #4610)
+  PDFlib could crash when the rdf:RDF node was missing from user-supplied
+  XMP metadata.
+
+- 2013-11-20 (feature #1664)
+  Implemented the "preservepua" font loading option which is particularly
+  useful to make sure that Japanese Gaiji characters can be extracted
+  correctly from the generated document.
+
+- 2013-11-20 (feature #1601)
+  Declared PDF_begin_pattern() deprecated; use PDF_begin_pattern_ext() instead.
+
+- 2013-11-20 (feature #1158)
+  Reorganized XMP parsing of PDI documents for more efficient access to
+  standard identification properties.
+
+- 2013-11-18 (bug #4601)
+  PDF_draw_path() with the option "clip" didn't work if none of the options
+  "fillrule" or "cliprule" was supplied; the default was implemented
+  incorrectly.
+
+- 2013-11-11 (bug #4588)
+  PDF_fill_textblock() did not correctly process the "matchbox" option.
+
+- 2013-11-08 (bug #4589)
+  PDF_fit_graphics() incorrectly scaled SVG graphics if the current
+  transformation matrix included scaling.
+  
+- 2013-11-08 (bug #4585)
+  Added checks in the XMP engine to avoid problems when processing
+  Description entries with an empty or missing xmlns attribute. 
+  
+- 2013-11-04 (bug #4584)
+  The PDF output for the georeference options "mappoints" and "worldpoints"
+  as well as the 3D options "camera2world" and "cameradistance" is
+  automatically emitted with extended floating point accuracy to avoid
+  rounding and truncation artifacts.
+  
+- 2013-10-28 (bug #4509)
+  Clarified the requirement of Microsoft redistributable runtime libraries
+  for the .NET edition and updated the .NET HowTo correspondingly.
+  
+- 2013-10-22 (feature #1651)
+  If an element contains mixed content (direct content and structure elements)
+  the kids are no longer sorted. This has previously been done to work around
+  restrictions in Acrobat's Read Aloud and Reflow features, but results in
+  undesired modifications to the client-provided tag structure.
+
+- 2013-10-21 (feature #1650)
+  Changed the starter_pdfua1 samples to add another P element as parent
+  of the Figure element. This more closely matches the recommended use of
+  the Figure element.
+  
+- 2013-10-21 (feature #1634)
+  Reworked the starter_webform samples to simplify font handling as a
+  benefit of the changes for feature #1625 and bug #4559. Since the Gentium
+  font is no longer used in examples it has been removed from all packages.
+
+- 2013-10-18 (bug #4369)
+  Clipping rectangles for SVG graphics could trigger an inappropriate
+  error "Images and graphics must be tagged as 'Artifact', 'Figure' or
+  'Formula' in PDF/UA". Now they are automatically tagged as Artifact.
+
+
+=================================
+PDFlib 9.0.1p4 (October 14, 2013)
+=================================
+
+- 2013-10-14 (bug #4573)
+  The "enumeratefonts" option didn't create a PostScript font name alias
+  for TrueType fonts with a PostScript name which don't have any style
+  specification.
+
+- 2013-10-14 (bug #4571)
+  The deprecated functions PDF_get_pdi_value() and PDF_get_pdi_parameter()
+  could issue a misleading error "Internal error: assertion failed" when
+  document and page handles from different PDI documents were mixed.
+
+- 2013-10-14 (bug #4561)
+  The starter_basic sample failed with Ruby 1.9 (but not Ruby 1.8 or 2.0)
+  due to its use of UTF-8-encoded strings. This has been fixed by adding
+  the "coding: utf-8" directive in the header.
+
+- 2013-10-11 (bug #4568)
+  When a font was preloaded with embedding, PDF_fill_textblock() did not
+  find the cached font, but tried to load it again without embedding. As
+  a result an error message "Font must be embedded in PDF/A" was issued
+  in PDF/A mode (similar for PDF/X and PDF/UA).
+
+- 2013-10-11 (bug #4570)
+  Loading LWFN fonts with certain style properties on the Mac could result
+  in a crash.
+
+- 2013-10-10 (bug #4567)
+  Symbolic TrueType fonts could be force-subsetted even if subsetting=false
+  was requested.
+
+- 2013-10-10 (feature #1625, bug #4559)
+  Redesigned the treatment of fonts for form fields in an attempt to balance
+  quirks in Acrobat's form handling with ISO 32000 and PDF/UA requirements.
+  In the course of the redesign the font option "autocidfont" has been
+  declared as deprecated.
+  
+- 2013-10-09 (bug #4566)
+  Using the "fakebold" option before placing an imported PDI page could
+  incorrectly also embolden text on the imported page because the text
+  state parameters were not correctly reset.
+
+- 2013-10-04 (bug #4473)
+  Checked compatibility with OS X 10.9 ("Mavericks"). This involved
+  a few changes in the build system and the Xcode project, as well as
+  a Mac build for Perl 5.16.
+
+- 2013-09-30 (bug #4554)
+  The SVG attributes "textLength" and "lengthAdjust" for vertical text 
+  (affected SVG elements: text, textpath, tref, tspan) are now ignored
+  since they are not implemented for vertical text.
+
+
+===================================
+PDFlib 9.0.1p3 (September 25, 2013)
+===================================
+
+- 2013-09-25 (bug #4557)
+  File access didn't work on MVS (bug introduced with the fix for bug
+  #4527 in PDFlib 9.0.1p2).
+
+- 2013-09-24 (bug #4555)
+  The glyph name table of Mac LWFN Type 1 fonts was not interpreted correctly
+  resulting in unusable glyphs.
+
+- 2013-09-20 (bug #4552)
+  The dummy appearances created for form fields contained incorrect name
+  entries. Now an empty dummy Form XObject is created.
+
+
+===================================
+PDFlib 9.0.1p2 (September 20, 2013)
+===================================
+
+- 2013-09-20 (bug #4544)
+  The REALbasic binding for Mac didn't support cross-compiling for Linux
+  due to a packaging error.
+
+- 2013-09-19 (feature #1627)
+  Implemented the option "checkoutputintentprofile" for PDF_open_pdi_document().
+  Setting it to false reduces memory requirements if PDF/X or PDF/A
+  documents are imported which are known to contain correct output intent
+  ICC profiles.
+
+- 2013-09-19 (bug #4548)
+  Avoid parsing the output intent ICC profile of PDF/A or PDF/X input
+  documents if no PDF/A or PDF/X output is created in order to reduce memory
+  requirements.
+
+- 2013-09-18 (bug #4547)
+  The final byte in Base64-encoded data could be missing or wrong, resulting
+  in inappropriate error messages or warnings for image, graphics or other
+  data embedded in SVG.
+
+- 2013-09-18 (bug #4546)
+  Using layers could result in an empty /AS entry although this entry is
+  not allowed in PDF/A, PDF/UA, and PDF/X. Now the empty dictionary is
+  suppressed to avoid validation errors (it didn't do any real harm). 
+
+- 2013-09-17 (bug #4545)
+  The PDF/UA standard identifier XMP property "pdfuaid" could get lost
+  for user-supplied XMP with multiple namespace declarations for an element.
+
+- 2013-09-16 (bug #4540)
+  Work around a compiler bug in the Borland/Embarcadero 64-bit compiler
+  which could result in a crash when loading PNG or TIFF images.
+  
+- 2013-09-16 (bug #4542)
+  Empty XMP files for the "metadata" option triggered an internal error.
+  Empty files for the "attachments" option were rejected. 
+
+- 2013-09-12 (bug #4532)
+  Invalid XMP was emitted if the input XMP contained properties in attribute
+  syntax which contained "&" or other characters which cannot be written
+  as literals, but require character references.
+
+- 2013-09-11 (bug #4515)
+  Added new suboptions "strokecolor", "strokewidth" and "textrendering" for
+  the "shadow" text option to enhance control over shadowed text in
+  combination with textrendering modes.
+
+- 2013-09-11 (feature #1622)
+  Support the "iccprofile" option for BMP, CCITT, GIF, JPEG 2000 and raw
+  images (in addition to the existing support for JPEG, JBIG2, PNG, and TIFF).
+
+- 2013-09-11 (bug #4527)
+  Incorrect out-of-memory errors could occur if a file name was supplied
+  which didn't point to a regular file (e.g. a directory).
+
+- 2013-09-11 (bug #4531)
+  PDF_load_iccprofile() could issue a confusing warning
+  "Option 'embedprofile' ignored"
+  even if this option wasn't provided by the user.
+
+- 2013-09-10 (bug #4539)
+  The option "iccprofile" of PDF_load_image() was ignored for JBIG2 images.
+
+- 2013-09-09 (bug #4526)
+  PDF_fit_textflow() could emit wrong glyph IDs (resulting in garbled text)
+  for SID OpenType fonts if more than 256 different glyphs were used and
+  a certain rare condition was true at the end of a text output chunk.
+
+- 2013-08-14 (bug #4523)
+  JPEG 2000 images could incorrectly be written with the entry /SMaskInData
+  if the "masked" option was supplied to PDF_load_image().
+  Even if "ignoremask" was set for JPEG 2000 images, they were considered
+  as transparent nevertheless.
+
+
+================================
+PDFlib 9.0.1p1 (August 13, 2013)
+================================
+
+- 2013-08-13 (bug #4518)
+  The "display" option of PDF_create_annotation() and PDF_create_field/group()
+  did not correctly process the "noview" option: the annotation or field
+  was invisible on print and visible on screen (instead of vice versa).
+
+- 2013-08-13 (bug #4521)
+  Creating page content in PDF/X mode without prior setting the output intent
+  was rejected with a confusing message. Now a message is emitted which
+  directly mentions the reason of the problem.
+
+- 2013-08-07 (bug #4516)
+  PDF_open_pdi_document() with inmemory=true could cause a crash.
+
+- 2013-08-05 (bug #4508)
+  convert_to_unicode() in the .NET and COM bindings cut off the generated
+  string after the first character.
+
+- 2013-08-05 (bug #4507)
+  Detect Apple's sbix-based bitmap fonts and reject them with a suitable
+  message.
+
+- 2013-08-05 (bug #4502)
+  PDF_info_textflow(): the value of "lastfontsize" could be wrong if
+  "fontscale" was applied.
+
+- 2013-07-31 (bug #4497)
+  Follow-up to bug #4482: "replacementchar" was still forced to "error" in
+  another place. As a result, custom replacement characters could not be
+  used in PDF/X-4/5, PDF/A-2/3, and PDF/UA.
+
+- 2013-07-29 (bug #3842)
+  The starter_fallback sample didn't work on MVS because the data directory
+  did not contain the required CMaps with short MVS file names.
+
+
+============================
+PDFlib 9.0.1 (July 29, 2013)
+============================
+
+- 2013-07-29 (bug #4495)
+  Empty values for the "userpassword" and "masterpassword" options
+  have not been treated correctly in non-Unicode-aware language bindings
+  with stringformat=utf8; similar for an empty value of the "searchpath"
+  option.
+  An empty value for the option "outputformat" of PDF_convert_to_unicode()
+  has incorrectly been rejected instead of being interpreted as "utf16".
+  
+- 2013-07-24 (bug #4488)
+  The combination of the options "enumeratfonts" and "saveresources"
+  didn't treat file names with non-ASCII characters correctly on Windows.
+
+- 2013-07-24 (bug #4432)
+  Added support for the REALbasic successor Xojo.
+
+- 2013-07-24 (bug #3842)
+  Fixed searchpath problems in the C samples for MVS.
+
+- 2013-07-24 (bug #4487)
+  PDF_create_field/fieldgroup() didn't process some options correctly with
+  C++ on EBCDIC platforms if the corresponding font was loaded with a
+  non-EBCDIC encoding.
+  The following parameters were treated incorrectly as UTF-8 in the
+  .NET, Perl, Python, REALbasic, Tcl, Objective-C, and COM bindings: 
+  PDF_get_option(), parameter "keyword"
+  PDF_load_asset(), parameter "type"
+  PDF_load_graphics(), parameter "type".
+  
+- 2013-07-24 (bug #4485)
+  PDF_create_field/fieldgroup() didn't process some options correctly with
+  Java on EBCDIC platforms if the corresponding font was loaded with a
+  non-EBCDIC encoding.
+
+- 2013-07-24 (bug #4486)
+  The "tagname" parameter of PDF_begin_item() was not processed correctly
+  in the Java binding if it contained non-ASCII characters.
+  
+- 2013-07-23 (bug #4381)
+  Fixed problems in the C samples for MVS related to encoding and textformat
+  issues.
+
+- 2013-07-21 (bug #4417)
+  Use double braces for the "searchpath" entries in all samples to caution
+  users because otherwise path entries containing a space character would
+  be interpreted as two separate entries.
+
+- 2013-07-18 (bug #4482)
+  The font option "replacementchar" is no longer forced to "error" in
+  PDF/A-2/3, PDF/UA and PDF/X-4/5 modes to allow clients to visualize
+  problematic text portions.
+
+- 2013-07-17 (feature #1596)
+  Modified the handling of H7, H8 etc. so that they are no longer treated
+  as standard elements, but require rolemap entries. Since PDF/UA consumers
+  are advised to ignore the rolemapping PDFlib also ignores the rolemaps
+  of H7 etc. in PDF/UA mode (other than writing them to the PDF output).
+
+- 2013-07-16 (bug #4479)
+  Patterns were displayed differently depending on whether the "topdown"
+  option was supplied to PDF_begin_page_ext() or to PDF_set_parameter().
+
+- 2013-07-10 (bug #2558)
+  Introduced a new PECL package for building a PDFlib 7/8/9 DSO for use
+  with PHP.
+
+- 2013-07-10 (bug #4476)
+  Matchbox decorations created for SVG graphics were slightly displaced in
+  a topdown coordinate system.
+
+- 2013-07-09 (bug #4474)
+  Graphics could have a wrong matchbox if all of the following conditions
+  were true: fitmethod=clip, the height of the graphics is larger than
+  the height of the fitbox, and a topdown coordinate system is active.
+
+- 2013-07-09 (spin-off of feature #1582)
+  Implemented the option "transform" for PDF_begin_template_ext().
+
+- 2013-07-09 (feature #1582)
+  Implemented an extended pattern interface in PDF_begin_pattern_ext();
+  currently it is only available in the C and C++ language bindings.
+
+- 2013-07-08 (bug #4445)
+  Textflow could split the text in an unexpected way with verticalalignment=
+  bottom or center and wrap boxes which resulted in increasing line widths
+  towards the bottom of the fitbox. 
+
+- 2013-07-05 (bug #4466)
+  With errorpolicy=return PDF_end_page_ext() could throw an exception
+  "Unmatched save level" if a prior call to PDF_fill_textblock() failed due
+  to a missing font.
+
+- 2013-07-02 (bug #4460)
+  If an SVG font does not include any glyph for the space character an
+  artificial empty glyph is created. In order to match the behavior of
+  browsers this artificial space glyph is used instead of the missing-glyph
+  even if it is present in the font.
+
+- 2013-07-02 (bug #4456)
+  Fixed a packaging problem (wrong lineend charactes) with the CMap package
+  for MVS.
+
+- 2013-07-02 (bug #4458)
+  PPS: if the Block property "features" was set together with one or more
+  other text properties PDF_fill_textblock() did not apply OpenType
+  features correctly.
+
+- 2013-07-01 (bug #4451)
+  Tuned the XMP implementation as follows:
+  - XMP metadata supplied in PDF_end_document() can override XMP supplied
+    in PDF_begin_document().
+  - If multiple chunks of XMP contained the same properties duplicate
+    entries could result in the merged output. Such duplicates are now
+    detected and avoided.
+
+- 2013-06-28 (bug #4447)
+  Set the glyph bit in the CIDSet stream in PDF/A-1 mode even for glyphs
+  without an outline to satisfy the stricter PDF/A-2 check in Acrobat XI
+  Preflight. This is required for workflows which create PDF/A-1 and later
+  import it into a PDF/A-2 document.
+  The CIDSet stream could contain an extra null byte at the end.
+
+- 2013-06-28 (bug #3467)
+  Increased the assumed resolution value which is used for scaling SVG
+  graphics where no viewBox attribute is present and the viewport size is
+  specified in pixels. 
+
+- 2013-06-28 (bug #4454)
+  Modified the clipping behavior for the outermost viewport of SVG graphics.
+  According to the SVG specification SVG graphics are now clipped only for
+  stand-alone graphics, i.e. SVG where width and height of the outermost
+  viewport are not specified as percentage.
+
+- 2013-06-28 (bug #4440)
+  SVG gradients with gradientUnits="objectBoundingBox" were missing if they
+  were referenced from a text element.
+   
+- 2013-06-26 (bug #4441)
+  PDFlib did not emit a /ModDate entry for PDF/A-3 associated files if
+  the attachment was loaded from a PVF file.
+  
+- 2013-06-24 (bug #4434)
+  PDF_process_pdi() with "action=copyoutputintent" now silently does
+  nothing if the input document doesn't contain any output intent. This
+  facilitates blind cloning of PDF/A documents which don't necessarily
+  contain an output intent.
+ 
+- 2013-06-21 (bug #4437)
+  XMP handling for PDF/A: improved the error message if a custom XMP property
+  without PDF/A extension handling was found.
+
+- 2013-06-21 (feature #1580)
+  Implemented stricter XMP namespace checks for PDF/A-2 and PDF/A-3 to
+  follow the XMP 2005 spec and match the behavior of Acrobat Preflight:
+  namespace URIs are now required to end in a "/" or "#" character.
+  Otherwise the XMP will be rejected.
+
+- 2013-06-18 (bug #4433)
+  The XMP processor incorrectly rejected PDF/A XMP with an extension schema
+  if the metadata properties for the extension schema were contained in
+  the same rdf:Description node as the corresponding extension schema
+  description.
+
+
+==============================
+PDFlib 9.0.0p4 (June 17, 2013)
+==============================
+
+- 2013-06-17 (bug #4426)
+  Host font support didn't work in the 32-bit build for Borland/Embarcadero.
+
+- 2013-06-17 (feature #1572)
+  Relaxed handling of file size and object limits in PDF/A and PDF/X as
+  follows:
+  - Due to practical demand and consensus with other vendors the 2GB file
+    size limit is no longer enforced. This is particularly relevant for
+    PDF/VT workflows.
+  - The check for the 8M limit for the number of indirect objects can be
+    disabled with the new document option "limitcheck".
+  
+- 2013-06-14 (bug #4422)
+  Optimized the linearization of large PDF/VT documents with a DPart
+  hierarchy. This significantly reduces processing time and output file
+  size. 
+
+- 2013-06-13 (bug #4425)
+  Detect errors in invalid BMP image files related to too few image data.
+  Missing image parts will be filled up with white pixels.
+
+- 2013-06-13 (bug #4418)
+  Modified the C++ sample project for the Borland/Embarcadero compiler to
+  turn off optimization. This is required to work around an optimizer
+  compiler bug related to C++ string handling.
+
+- 2013-06-11 (feature #1572)
+  Increased the maximum number of entries in the "dasharray" option from
+  8 to 12 to meet the requirements of demanding graphics applications.
+
+- 2013-06-11 (feature #1430)
+  Enhanced the interpretation of OpenType features to support lookup
+  types 2, 5, and 6. These context-sensitive lookups are required e.g. for
+  fonts which resemble cursive handwriting. As a follow-up the OpenType
+  features "calt", "ccmp", "clig", and "cswh" are now also supported.
+
+- 2013-05-08 (feature #1564)
+  Enhanced the treatment of clipping paths in Tagged PDF.
+
+
+==============================
+PDFlib 9.0.0p3 (June 05, 2013)
+==============================
+
+- 2013-06-05 (bug #4415)
+  PDF_info_textline() with the keyword "unknownchars" would incorrectly
+  throw an exception "Glyph id 0 (notdef character) not allowed" in
+  PDF/A-2/3, PDF/UA and PDF/X-4/5 mode if the tested string contained a
+  character for which no glyph was available in the font.
+
+- 2013-06-04 (bug #4412)
+  Improved the accuracy of bounding box calculations for Bezier curves in
+  image clipping paths to avoid inaccurate image placement in cases with
+  large Bezier segments.
+
+- 2013-06-03 (bug #4407)
+  SVG patterns could be rendered incorrectly if the global option "topdown"
+  was set.
+
+- 2013-06-03 (bug #4404)
+  The text option "fontstyle=bold" in combination with "topdown" incorrectly
+  increased the font size.
+
+- 2013-06-03 (bug #4400)
+  The option "checkcolorspace" was incorrectly documented as "colorspacecheck".
+
+- 2013-05-31 (bug #4409)
+  The global option "topdown" was not treated as Boolean type so that the
+  variant "notopdown" didn't work.
+
+- 2013-05-28 (bug #4405)
+  Added C++ support files to the Borland package.
+
+- 2013-05-27 (bug #4399)
+  Option lists with a leading UTF-8 BOM and a space character before the
+  first option were incorrectly rejected.
+
+- 2013-05-23 (bug #4394)
+  The global option "topdown" was not honored in PDF_begin_template_ext().
+
+- 2013-05-22 (bug #4342)
+  Fixed searchpath problems with the C mini samples on MVS.
+
+- 2013-05-22 (bug #4387)
+  PDFlib didn't work with Ruby 2.0 on Windows.
+
+- 2013-05-22 (bug #4391)
+  Resetting the transparency blending mode with "blendmode=None" didn't work.
+
+- 2013-05-17 (bug #4377/feature #1230)
+  Files attached with PDF_add_portfolio_file() were not associated with
+  any document component in PDF/A-3 mode. Now they are implicitly associated
+  with the whole document.
+
+- 2013-05-16 (bug #4357)
+  Automatically create a transparencygroup entry for the page if an image
+  with a color key mask was placed. These are created from PNG and GIF
+  images with a single transparent color value or PNG with a single
+  transparent entry in the tRNS chunk. Strictly speaking this shouldn't
+  be requires since no real transparency is involved, but it significantly
+  improves the screen display in Acrobat.
+
+- 2013-05-16 (bug #4352/REOPENED)
+  While the previous fix worked, it had been applied only to PDF_xshow(),
+  but not PDF_fit_textline().
+
+- 2013-05-13 (bug #4380)
+  The table formatter could chop off some contents of a textflow cell in
+  the last row. Now an error message is emitted if the Textflow cannot be
+  squeezed into the cell according to the specified shrinking limits.
+
+
+=============================
+PDFlib 9.0.0p2 (May 08, 2013)
+=============================
+
+- 2013-05-08 (bug #4379)
+  Replaced stray non-ASCII characters in the description text of the
+  FOGRA15 and FOGRA23 standard output intents for PDF/X-3.
+
+- 2013-05-08 (bug #4368)
+  The final output file (as opposed to the temporary file) is now opened
+  in PDF_begin_document() even with the "linearize" and "optimize" option
+  to make sure that problems with opening the file are already diagnosed
+  when starting a document instead of in PDF_end_document().
+
+- 2013-05-06 (bug #4375)
+  The global "usercoordinates" setting was not correctly honored in
+  PDF_create_field(). 
+
+- 2013-05-02 (bug #4360)
+  XMP properties in the "pdfx" (PDF eXtended) namespace were rejected in
+  PDF/A mode even if the corresponding extension schema description was
+  present. As a side effect of this change incorrect namespace prefixes
+  within PDF/A extension schema descriptions are now corrected.
+
+- 2013-04-29 (bug #4372)
+  SVG: fixed incorrect treatment of large numerical values in the scanner.
+
+- 2013-04-29 (bug #4371)
+  Reinstalled the former treatment of invalid Rational entries in TIFF
+  images so that denominator=0 is again treated as 1 (e.g. to avoid
+  unreasonable resolution values).
+
+- 2013-04-22 (bug #4352)
+  PDF_xshow() and PDF_fit_textline() with the "xadvancelist" option produced
+  wrong output, wrong metrics and/or the inappropriate error message
+  "Floating point number xtoo large" if the text contained text layout control
+  characters of the following list:
+  NBSP NNBSP ZWNJ ZWJ LRM RLM LRE RLE PDF LRO RLO
+
+- 2013-04-22 (bug #4353)
+  A misleading message "File 'xxx.PFB' does not seem to be an SVG file" was
+  emitted if a FontOutline resource was configured for a font which was
+  neither TrueType nor OpenType, and no corresponding AFM or PFM file was
+  configured. Now the more appropriate message "AFM or PFM font metrics file
+  not found" is produced.
+
+- 2013-04-16 (bug #4350)
+  A crash could occur if pCOS accessed an invalid UTF-8 sequence and neither
+  CMaps nor cpxxxx host encodings were available.
+
+- 2013-04-11 (bug #4347)
+  Compressed stream data was truncated if the uncompressed stream input
+  exceeded 4GB.
+
+- 2013-04-11 (bug #4348)
+  PDFlib builds without encryption support (PDF_FEATURE_SECURITY) didn't
+  work.
+
+
+===============================
+PDFlib 9.0.0p1 (April 09, 2013)
+===============================
+
+- 2013-04-09 (bug #4344)
+  In case of an ICC profile mismatch (e.g. CMYK profile instead of RGB) the
+  error message didn't include the name of the profile.
+
+- 2013-04-09 (bug #4342)
+  Importing Tagged PDF documents into an untagged document without closing
+  the documents resulted in the following exception in PDF_delete():
+  "Illegal array index 1 in function pdc__vtr_at".
+
+- 2013-04-09 (bug #4330)
+  Fixed a crash when loading large TIFF images with
+  (width*height*bpc*components)/8 > 4GB.
+
+- 2013-04-08 (bug #4245)
+  Switched the build process for the Ruby binding on Windows to MinGW to
+  support Ruby 1.9 and above.
+
+- 2013-04-07 (bug #4329)
+  Deriving a PHP class from the PDFlib class could result in a crash.
+
+- 2013-04-03 (bug #4333)
+  Fixed a memory leak for TIFF images which are handled in raw pixel mode
+  and have an orientation tag.
+
+- 2013-03-27 (bug #4318)
+  Modified the treatment of SVG viewports with percentage values.
+
+- 2013-03-25 (bug #4327)
+  Fixed a memory leak in PDFlib-only source code packages.
+
+- 2013-03-21 (bug #4325)
+  Fixed a problem with the calculation of matchboxes in a Textflow.
+
+- 2013-03-21 (bug #4326)
+  Fixed a problem with compiling source code packages on Linux 32-bit.
+
+
+=============================
+PDFlib 9.0.0 (March 14, 2013)
+=============================
+
+- Implements a variety of new features and options, see PDFlib Tutorial
+  and API Reference for details.

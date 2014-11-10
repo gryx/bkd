@@ -1,0 +1,219 @@
+============================================
+System Requirements for PDFlib GmbH Products
+============================================
+
+Latest change: 2013-12-05
+
+This document describes the requirements for using PDFlib GmbH binaries on
+various platforms. This list covers all platforms on which at least one
+product is supported. It should not be construed as a commitment regarding
+the availability of product/platform combinations.
+
+To find out whether a PDFlib GmbH product is supported at all on a particular
+platform please check the downloadable binary packages which are available
+at www.pdflib.com.
+
+
+================================
+Note on 64-bit Intel platforms
+================================
+Intel uses the term "Intel 64" for a processor architecture which is
+known by several other names:
+- Intel formerly called it EM64T (after using IA-32e)
+- Microsoft and Oracle call it x64
+- AMD calls it AMD64 (after using x86-64)
+- Linux systems often refer to x86_64
+
+PDFlib GmbH binaries for Intel 64 work on all architectures listed above.
+They do not work on Intel Itanium (formerly called IA-64), which is
+a separate architecture.
+Because of the vendor-specific conventions we continue to use the term "x64"
+instead of "Intel 64" in the context of Oracle and Microsoft operating systems. 
+
+
+================================
+Windows
+================================
+
+Requirements:
+Windows XP/Vista/7/8/8.1 on x86 or x64
+Windows Server 2003/2003 R2/2008/2008 R2/2012/2012 R2 on x86 or x64
+
+.NET binding
+------------
+The following flavors are supported:
+- .NET Framework 2.0 - 3.5
+- .NET Framework 4.0 - 4.5
+- 32-bit (x86) and 64-bit (x64) versions of the above
+
+See PDFlib-in-.NET-HowTo.pdf for details on .NET configuration.
+
+With ASP.NET 2.0 and above the .NET editions of PDFlib GmbH products require
+Full Trust level. They do not work with any other trust level, such as
+High or Medium Trust.
+
+C and C++ bindings
+------------------
+Project files for the programming samples are available for
+Visual Studio 2005. VS2008, VS2010 and VS2012 can convert these automatically.
+
+
+================================
+Linux
+================================
+Requirements: GLIBC 2.3 (or later) based system on x86
+              GLIBC 2.4 (or later) based system on Intel 64
+
+C and C++ bindings
+------------------
+Compiler:
+    x86: g++ 3.4 or above (gcc 4.0 or above recommended)
+    Intel 64: g++ 4.0 or above
+    LDFLAGS: "-pthread"
+
+Java, Perl, PHP, Python, Ruby, Tcl bindings
+-------------------------------------------
+x86 and Intel 64: libstdc++.so.6
+
+
+================================
+Embedded Linux
+================================
+Please see separate document readme-embedded-linux.txt.
+
+
+================================
+OS X
+================================
+Requirements: OS X 10.6/10.7/10.8/10.9 on x86/x64
+
+OS X 10.8 and above:
+
+Since OS X 10.8 the Gatekeeper protection feature blocks unsigned
+applications. This applies to all PDFlib GmbH command line tools.
+If you want to use these tools on OS X 10.8 or later you must inform
+the system that it is a safe application. Override Gatekeeper by
+Control-clicking the application icon and select "Open" from the top of
+the context menu.
+This must be done only once per user account.
+
+
+C, C++, and Objective-C bindings
+--------------------------------
+Compiler: Xcode 4.2 or above
+
+
+================================
+FreeBSD
+================================
+Requirements:
+x86: FreeBSD 7/8/9 and compatible systems
+Intel 64: FreeBSD 7/8/9 and compatible systems
+
+
+================================
+AIX
+================================
+Requirements: AIX 5.2 and compatible systems; currently AIX 6/7
+
+C and C++ bindings
+------------------
+Compiler: XLC 8.0 or above: you must use a thread-safe variant of the compiler
+(such as xlC_r).
+
+g++ is unsupported:
+    CFLAGS/CXXFLAGS for g++: "-mxl-compat -pthread"
+    LDFLAGS for g++: "-lC -pthread"
+
+
+================================
+HP-UX
+================================
+Requirements:
+HP-UX 11.23 and compatible systems on IA-64
+(currently up to 11.31 and 11i v3)
+
+C and C++ bindings
+------------------
+Compiler: aCC
+CFLAGS/CXXFLAGS/LDFLAGS: "-mt" (required for multithreaded applications)
+CXXFLAGS/LDFLAGS: "-AA" (required for 2.0 Standard C++ Library)
+
+g++ is unsupported:
+    CFLAGS/CXXFLAGS/LDFLAGS for g++: "-lCsup_v2 -pthread",
+
+
+================================
+iOS
+================================
+Requirements:
+Requirements:
+- Runtime requirements: iPhone OS 5.1.1 or later
+- development requirements: Xcode 5.0.1 or later
+- supported language bindings: Objective C, C, C++
+
+================================
+Android
+================================
+Requirements:
+- runtime requirements: Android 2.1 (API-Level-7) and newer is supported
+- development requirements: Android SDK r10 or newer is recommended.
+- supported language binding: Java
+
+
+================================================
+Windows Embedded CE and Windows Embedded Compact
+================================================
+Requirements:
+- runtime requirements:
+  - Windows Embedded CE 6.0, Windows Embedded Compact 7.0
+  - CPU architectures: ARMV4I or newer, x86
+- development requirements: Platform Builder for Windows Embedded CE 6.0
+  or later
+- supported language binding: C, C++
+
+
+================================
+Solaris
+================================
+Requirements: Solaris 8 and above on x86, x64, or sparc
+
+C and C++ bindings
+------------------
+Compiler: Oracle Solaris Studio
+CFLAGS/CXXFLAGS/LDFLAGS: "-mt -lpthread"
+
+g++ is unsupported:
+    CFLAGS/CXXFLAGS for g++: "-pthread"
+    LDFLAGS for g++: "-lCstd -lCrun -pthread"
+
+
+================================
+i5/iSeries
+================================
+General requirements: OS V5 R3 M0 and compatible systems
+
+Requirements for using PDFlib GmbH products with PHP:
+- Zend Server for IBM i or Zend Server Community Edition (CE) for IBM i
+  (requires PASE for i, which is a no-charge option of IBM i)
+- PHP 5.3
+- The binaries from the AIX 32-bit package must be used (not from the
+  i5/iSeries package)
+
+
+================================
+zSeries
+================================
+Requirements:
+z/OS 1.6 and compatible systems with USS (32-bit/64-bit) or MVS (32-bit)
+(MVS versions of PDFlib GmbH products are not thread-safe)
+
+or
+
+zLinux 32-bit or 64-bit (s390/s390x)
+GLIBC 2.3 (or later) based system (e.g. SLES 10 or above, RHEL 5 or above).
+
+
+C/C++ binding
+-------------
+CFLAGS/CXXFLAGS: -W "c,float(ieee)"

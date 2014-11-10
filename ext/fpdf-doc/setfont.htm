@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>SetFont</title>
+<link type="text/css" rel="stylesheet" href="fpdf.css">
+</head>
+<body>
+<h1>SetFont</h1>
+<code>SetFont(<b>string</b> family [, <b>string</b> style [, <b>float</b> size]])</code>
+<h2>Deskripsi</h2>
+Mengeset font yang digunakan untuk menampilkan teks. Anda harus memanggil metode ini minimal sekali sebelum menampilkan teks atau dokumen yang dibuat dianggap tidak valid.
+<br>
+Font yang digunakan bisa font standar atau font yang ditambahkan dengan metode AddFont() method. Font standar menggunakan <em>encoding</em> Windows cp1252 (Western Europe).
+<br>
+Metode ini bisa dipanggil sebelum halaman pertama dibuat dan font yang digunakan akan dipertahankan dari halaman ke halaman.
+<br>
+Jika Anda hanya ingin mengubah ukuran font sekarang, Anda bisa menggunakan SetFontSize() yang lebih mudah.
+<br>
+<br>
+<strong>Catatan:</strong> file metrik font harus dapat diakses. File-file tersebut akan dicari dengan urutan sebagai berikut:
+<ul>
+<li>Di direktori yang didefinisikan oleh nilai konstanta <code>FPDF_FONTPATH</code> (jika konstanta tersebut telah didefinisikan)</li>
+<li>Di direktori <code>font</code> yang terdapat di direktori yang berisi <code>fpdf.php</code> (jika ada)</li>
+<li>Di direktori-direktori yang bisa diakses melalui <code>include()</code></li>
+</ul>
+Contah mendefinisikan <code>FPDF_FONTPATH</code> (jangan lupa untuk menambahkan garis miring / <em>slash</em> di akhir):
+<div class="doc-source">
+<pre><code>define('FPDF_FONTPATH','/home/www/font/');
+require('fpdf.php');</code></pre>
+</div>
+Jika file font yang dimaksud tidak ditemukan, maka pesan kesalahan "<em>Could not include font metric file</em>" (Tidak dapat menyertakan file metrik font) akan muncul.
+<h2>Parameter</h2>
+<dl class="param">
+<dt><code>family</code></dt>
+<dd>
+Keluarga font. Nilainya bisa berupa nama yang didefinisikan oleh AddFont() atau salah satu nama standar (case insensitive):
+<ul>
+<li><code>Courier</code> (lebar semua huruf sama)</li>
+<li><code>Helvetica</code> atau <code>Arial</code> (bersinonim; sans serif)</li>
+<li><code>Times</code> (serif)</li>
+<li><code>Symbol</code> (simbolik)</li>
+<li><code>ZapfDingbats</code> (simbolik)</li>
+</ul>
+Anda juga boleh memberikan nilai string kosong untuk parameter ini. Jika demikian, maka font yang sekaranglah yang digunakan.
+</dd>
+<dt><code>style</code></dt>
+<dd>
+Tampilan font (style). Nilainya adalah (case insensitive):
+<ul>
+<li>string kosong: reguler</li>
+<li><code>B</code>: bold</li>
+<li><code>I</code>: italic</li>
+<li><code>U</code>: underline</li>
+</ul>
+atau kombinasi nilai-nilai diatas dengan urutan bebas. Nilai default adalah reguler. Style bold dan italic tidak berlaku untuk <code>Symbol</code> dan <code>ZapfDingbats</code>.
+</dd>
+<dt><code>size</code></dt>
+<dd>
+Ukuran font dalam point.
+<br>
+Nilai default adalah ukuran sekarang. Jika ukuran font belum ditentukan sejak awal pembuatan dokumen, maka nilainya dianggap 12.
+</dd>
+</dl>
+<h2>Contoh</h2>
+<div class="doc-source">
+<pre><code>//Times reguler 12
+$pdf-&gt;SetFont('Times');
+//Arial bold 14
+$pdf-&gt;SetFont('Arial','B',14);
+//Menghilangkan bold
+$pdf-&gt;SetFont('');
+//Times bold, italic dan underline 14
+$pdf-&gt;SetFont('Times','BIU');</code></pre>
+</div>
+<h2>Lihat juga</h2>
+<a href="addfont.htm">AddFont()</a>,
+<a href="setfontsize.htm">SetFontSize()</a>,
+<a href="cell.htm">Cell()</a>,
+<a href="multicell.htm">MultiCell()</a>,
+<a href="write.htm">Write()</a>.
+<hr style="margin-top:1.5em">
+<div style="text-align:center"><a href="index.htm">Indeks</a></div>
+</body>
+</html>

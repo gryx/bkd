@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Image</title>
+<link type="text/css" rel="stylesheet" href="fpdf.css">
+</head>
+<body>
+<h1>Image</h1>
+<code>Image(<b>string</b> file [, <b>float</b> x [, <b>float</b> y [, <b>float</b> w [, <b>float</b> h [, <b>string</b> type [, <b>mixed</b> link]]]]]])</code>
+<h2>Deskripsi</h2>
+Menampilkan gambar. Ukuran gambar yang ditampilkan dapat ditentukan dengan berbagai cara:
+<ul>
+<li>lebar dan tinggi ditentukan secara eksplisit (dinyatakan dalam satuan yang diberikan pada constructor)</li>
+<li>salah satu ukuran ditentukan secara eksplisit, yang lainnya akan dihitung secara otomatis untuk menjaga proporsional gambar aslinya</li>
+<li>ukuran tidak ditentukan; dalam hal ini gambar akan ditampilkan dalam 72 dpi</li>
+</ul>
+Format gambar yang didukung adalah JPEG, PNG dan GIF. Ekstensi GD diperlukan untuk menampilkan GIF.
+<br>
+<br>
+Untuk JPEG, semua kedalaman warna boleh:
+<ul>
+<li>skala abu-abu (<em>gray scale</em>)</li>
+<li>true colors (24 bit)</li>
+<li>CMYK (32 bit)</li>
+</ul>
+Untuk PNG, hanya:
+<ul>
+<li>gray scale maksimal 8 bit (256 warna)</li>
+<li>warna indeks (<em>indexed colors</em>)</li>
+<li>true colors (24 bit)</li>
+</ul>
+tetapi tidak bisa:
+<ul>
+<li>Interlacing</li>
+<li>Alpha channel</li>
+</ul>
+Untuk GIF: jika merupakan animasi, hanya gambar (<em>frame</em>) pertama yang digunakan.<br>
+<br>
+Jika terdapat warna transparan, maka akan disertakan.<br>
+<br>
+Format gambar dapat dinyatakan secara ekspisit atau secara otomatis ditentukan dari ekstensi file.<br>
+Anda dapat membuat link pada gambar.<br>
+<br>
+Catatan: jika sebuah gambar digunakan berkali-kali, hanya satu salinan yang disertakan (embed) dalam dokumen.
+<h2>Parameter</h2>
+<dl class="param">
+<dt><code>file</code></dt>
+<dd>
+Lokasi (<em>path</em>) atau URL gambar.
+</dd>
+<dt><code>x</code></dt>
+<dd>
+Nilai absis pojok kiri atas. Jika tidak ditentukan atau nilainya sama dengan <code>null</code>, maka nilai absis sekarang yang akan digunakan.
+</dd>
+<dt><code>y</code></dt>
+<dd>
+Nilai ordinat pojok kiri atas. Jika tidak ditentukan atau nilainya sama dengan <code>null</code>, maka nilai ordinat sekarang yang akan digunakan; tambahan lagi, penanda akhir halaman akan dibuat terlebih dahulu jika perlu (jika pemberian penanda akhir halaman otomatis aktif) dan, setelah memanggil metode ini, nilai ordinat sekarang akan berpindah ke bagian bawah gambar.
+</dd>
+<dt><code>w</code></dt>
+<dd>
+Lebar gambar yang akan ditampilkan. Jika tidak ditentukan atau sama dengan nol, maka akan dihitung secara otomatis.
+</dd>
+<dt><code>h</code></dt>
+<dd>
+Tinggi gambar yang akan ditampilkan. Jika tidak ditentukan atau sama dengan nol, maka akan dihitung secara otomatis.
+</dd>
+<dt><code>type</code></dt>
+<dd>
+Format gambar. Nilainya adalah (case insensitive): <code>JPG</code>, <code>JPEG</code>, <code>PNG</code> and <code>GIF</code>.
+Jika tidak dinyatakan secara ekspisit, maka otomatis ditentukan dari ekstensi file.
+</dd>
+<dt><code>link</code></dt>
+<dd>
+URL atau nilai identitas yang dikembalikan oleh AddLink().
+</dd>
+</dl>
+<h2>Lihat juga</h2>
+<a href="addlink.htm">AddLink()</a>.
+<hr style="margin-top:1.5em">
+<div style="text-align:center"><a href="index.htm">Indeks</a></div>
+</body>
+</html>

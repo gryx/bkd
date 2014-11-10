@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>SetDrawColor</title>
+<link type="text/css" rel="stylesheet" href="fpdf.css">
+</head>
+<body>
+<h1>SetDrawColor</h1>
+<code>SetDrawColor(<b>int</b> r [, <b>int</b> g, <b>int</b> b])</code>
+<h2>Deskripsi</h2>
+Menentukan warna yang digunakan untuk semua operasi pembuatan gambar (garis, kotak dan garis batas sel). Nilainya dapat diberikan dalam komponen RGB atau gray scale. Metode ini bisa dipanggil sebelum membuat halaman pertama dan nilainya akan dipertahankan dari halaman ke halaman.
+<h2>Parameter</h2>
+<dl class="param">
+<dt><code>r</code></dt>
+<dd>
+Jika <code>g</code> dan <code>b</code> diberikan, maka dianggap sebagai komponen warna merah; jika tidak, menandakan derajat abu-abu (<em>grey level</em>). Nilainya antara 0 dan 255.
+</dd>
+<dt><code>g</code></dt>
+<dd>
+Komponen warna hijau (antara 0 dan 255).
+</dd>
+<dt><code>b</code></dt>
+<dd>
+Komponen warna biru (antara 0 dan 255).
+</dd>
+</dl>
+<h2>Lihat juga</h2>
+<a href="setfillcolor.htm">SetFillColor()</a>,
+<a href="settextcolor.htm">SetTextColor()</a>,
+<a href="line.htm">Line()</a>,
+<a href="rect.htm">Rect()</a>,
+<a href="cell.htm">Cell()</a>,
+<a href="multicell.htm">MultiCell()</a>.
+<hr style="margin-top:1.5em">
+<div style="text-align:center"><a href="index.htm">Indeks</a></div>
+</body>
+</html>

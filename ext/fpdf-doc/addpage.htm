@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>AddPage</title>
+<link type="text/css" rel="stylesheet" href="fpdf.css">
+</head>
+<body>
+<h1>AddPage</h1>
+<code>AddPage([<b>string</b> orientation ,[ <b>mixed</b> format]])</code>
+<h2>Deskripsi</h2>
+Menambahkan halaman baru ke dalam dokumen. Jika halaman sudah ada, maka metode Footer() dipanggil terlebih dahulu untuk menampilkan footer. Kemudian halaman ditambahkan, posisi sekarang diset ke kiri atas sesuai margin kiri dan margin atas, dan Header() dipanggil untuk menampilkan header.
+<br>
+Font yang telah digunakan sebelum memanggil metode ini adalah tetap, tidak berubah. Jadi tidak perlu memanggil SetFont() lagi jika Anda ingin tetap menggunakan font yang sama. Hal yang sama juga berlaku untuk warna dan tebal garis.
+<br>
+Sistem koordinat dimulai dari pojok kiri atas, nilai absis (sumbu x) bertambah ke kanan dan nilai ordinat (sumbu y) bertambah ke bawah.
+<h2>Parameter</h2>
+<dl class="param">
+<dt><code>orientation</code></dt>
+<dd>
+Orientasi halaman. Nilainya adalah (case insensitive):
+<ul>
+<li><code>P</code> atau <code>Portrait</code></li>
+<li><code>L</code> atau <code>Landscape</code></li>
+</ul>
+Nilai default adalah sama dengan nilai yang diberikan kepada constructor.
+</dd>
+<dt><code>format</code></dt>
+<dd>
+Format halaman. Nilainya adalah salah satu di antara berikut ini (case insensitive):
+<ul>
+<li><code>A3</code></li>
+<li><code>A4</code></li>
+<li><code>A5</code></li>
+<li><code>Letter</code></li>
+<li><code>Legal</code></li>
+</ul>
+atau <em>array</em> yang berisi nilai lebar dan tinggi (dalam <em>user unit</em>).<br>
+<br>
+Nilai default adalah sama dengan nilai yang diberikan kepada constructor.
+</dd>
+</dl>
+<h2>Lihat juga</h2>
+<a href="fpdf.htm">FPDF()</a>,
+<a href="header.htm">Header()</a>,
+<a href="footer.htm">Footer()</a>,
+<a href="setmargins.htm">SetMargins()</a>.
+<hr style="margin-top:1.5em">
+<div style="text-align:center"><a href="index.htm">Indeks</a></div>
+</body>
+</html>

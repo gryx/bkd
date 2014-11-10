@@ -1,0 +1,1 @@
+Tutorial Downloaded from @ http://www.saaraan.com/2013/04/username-live-check-using-ajax-php

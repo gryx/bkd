@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Write</title>
+<link type="text/css" rel="stylesheet" href="fpdf.css">
+</head>
+<body>
+<h1>Write</h1>
+<code>Write(<b>float</b> h, <b>string</b> txt [, <b>mixed</b> link])</code>
+<h2>Deskripsi</h2>
+Metode ini menampilkan teks dari posisi sekarang. Jika telah mencapai margin kanan (atau menemukan karakter \n), baris baru akan dibuat dan teks berlanjut dari margin kiri. Setelah metode ini dijalankan posisi sekarang diset di akhir teks.
+<br>
+Anda juga dapat menambahkan link pada teks.
+<h2>Parameter</h2>
+<dl class="param">
+<dt><code>h</code></dt>
+<dd>
+Tinggi teks.
+</dd>
+<dt><code>txt</code></dt>
+<dd>
+Teks yang akan ditampilkan.
+</dd>
+<dt><code>link</code></dt>
+<dd>
+URL atau nilai identitas yang dikembalikan oleh AddLink().
+</dd>
+</dl>
+<h2>Contoh</h2>
+<div class="doc-source">
+<pre><code>//Mulai dengan font reguler
+$pdf-&gt;SetFont('Arial','',14);
+$pdf-&gt;Write(5,'Visit ');
+//Lalu tambahkan link biru bergaris bawah
+$pdf-&gt;SetTextColor(0,0,255);
+$pdf-&gt;SetFont('','U');
+$pdf-&gt;Write(5,'www.fpdf.org','http://www.fpdf.org');</code></pre>
+</div>
+<h2>Lihat juga</h2>
+<a href="setfont.htm">SetFont()</a>,
+<a href="settextcolor.htm">SetTextColor()</a>,
+<a href="addlink.htm">AddLink()</a>,
+<a href="multicell.htm">MultiCell()</a>,
+<a href="setautopagebreak.htm">SetAutoPageBreak()</a>.
+<hr style="margin-top:1.5em">
+<div style="text-align:center"><a href="index.htm">Indeks</a></div>
+</body>
+</html>

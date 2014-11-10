@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+
+   <title>Validate</title>
+
+   <link rel="stylesheet" href="../jq/jqval/css/validationEngine.jquery.css" type="text/css"/>
+   <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+   <script src="../jqui/jquery-ui-1.10.3/ui/minified/jquery-ui.min.js"></script>
+   <script src="../jq/jqval/js/languages/jquery.validationEngine-id.js" type="text/javascript" charset="utf-8"></script>
+   <script src="../jq/jqval/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+
+   <fieldset>
+      <form  id="form" method="post" action="post.php">
+         <table>
+            <tr>
+               <td>NIP*</td>
+               <td>
+                  <input class="validate[required,custom[onlyNumberSp]]" id="nip" maxlength="18" name="nip" size="20" type="text"/>
+               </td>
+           </tr>
+           <tr>
+              <td>TMT*</td>
+              <td>
+                 <input id="datepicker" name="tmt" type="text"/>
+              </td>
+           </tr>
+      </table>
+   </form>
+</fieldset>
+
+<script type="text/javascript">
+   //datepicker
+   $(function() {   
+      $( "#datepicker" ).datepicker({ changeYear:true,changeMonth:true });
+   });
+
+
+   //jqueryValidation
+   $(document).ready(function(){
+      $("#form").validationEngine();
+   });
+</script>
+
+</body>
+</html>

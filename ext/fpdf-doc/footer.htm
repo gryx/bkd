@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Footer</title>
+<link type="text/css" rel="stylesheet" href="fpdf.css">
+</head>
+<body>
+<h1>Footer</h1>
+<code>Footer()</code>
+<h2>Deskripsi</h2>
+Metode ini digunakan untuk menampilkan footer. Metode ini dipanggil secara otomatis oleh AddPage() dan Close() dan tidak disarankan untuk dipanggil langsung dalam aplikasi. Implementasi metode ini dalam FPDF adalah kosong, jadi Anda harus membuat <em>subclass</em> dan menimpanya untuk mendapatkan hasil sesuai keinginan.
+<h2>Contoh</h2>
+<div class="doc-source">
+<pre><code>class PDF extends FPDF
+{
+function Footer()
+{
+   //Geser posisi ke 1,5 cm dari bawah
+   $this-&gt;SetY(-15);
+   //Pilih font Arial italic 8
+   $this-&gt;SetFont('Arial','I',8);
+   //Tampilkan nomor halaman rata tengah
+   $this-&gt;Cell(0,10,'Page '.$this-&gt;PageNo(),0,0,'C');
+}
+}</code></pre>
+</div>
+<h2>Lihat juga</h2>
+<a href="header.htm">Header()</a>.
+<hr style="margin-top:1.5em">
+<div style="text-align:center"><a href="index.htm">Indeks</a></div>
+</body>
+</html>

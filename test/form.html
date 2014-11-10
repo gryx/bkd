@@ -1,0 +1,36 @@
+<head>
+    <title>jQuery Validator</title>
+	 <link rel="stylesheet" href="../jq/jqval/css/validationEngine.jquery.css" type="text/css"/>
+	 <link rel="stylesheet" href="../jqui/jquery-ui-1.10.3/themes/base/jquery-ui.css" />
+      
+	 <script src="../jq/jquery.min.js"></script>
+	 <script src="../jqui/jquery-ui-1.10.3/ui/minified/jquery-ui.min.js"></script>
+	 <script src="../jq/jqval/js/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script>
+	 <script src="../jq/jqval/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        label {
+            float: left;
+            width: 200px;
+        }
+    </style>
+</head>
+    <script type="text/javascript">
+	 $(function() {   
+	    $( "#datepicker" ).datepicker({ changeYear:true,changeMonth:true });
+	 });
+         $(document).ready(function(){
+            $("#formulir").validationEngine();
+	    $("#datepicker" ).datepicker({ changeYear:true,changeMonth:true });
+         });
+
+    </script>
+   <br><br>
+   <fieldset>
+	 <form id="formulir" >
+                  <table>
+		  <tr><td>NIP*</td> <td>
+		  <input type="text" maxlength="18" size="20" class="validate[required,custom[onlyNumberSp]]" name="nip" id="nip"/></td></tr>
+		  <tr><td>TMT*</td><td>        <input type="text" id="datepicker" name="tmt"></td></tr>
+		  </table>
+	 </form>
+    </fieldset>
