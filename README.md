@@ -14,8 +14,8 @@ Dalam suatu Perusahaan maupun Badan Kepegawaian tentu membutuhkan karyawan agar 
 
 Terdapat 3 User :<br>
 	1. Admin	-> uname : aldy; 	pass : aldy;<br>
-	2. Penilai	-> uname : <NIP>; 	pass : penilai;<br>
-	3. Atasan	-> uname : <NIP>; 	pass : atasan;<br>
+	2. Penilai	-> uname : "NIP"; 	pass : penilai;<br>
+	3. Atasan	-> uname : "NIP"; 	pass : atasan;<br>
 
 <p>untuk NIP dapat dilihat dengan melakukan login sebagai Admin dan menuju ke panel Data Pegawai.</p>
 	
