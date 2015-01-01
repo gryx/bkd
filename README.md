@@ -9,3 +9,14 @@ Dalam suatu Perusahaan maupun Badan Kepegawaian tentu membutuhkan karyawan agar 
 	Berdasarkan studi kasus yang dilakukan di Badan Kepegawaian Daerah Kabupaten Blora masih belum ada skema efektif untuk menentukan siapa saja yang mempunyai kinerja karyawan  bagus karena cenderung dinilai dari kehadiran dan aspek lain seperti kesetiaan, prestasi kerja, tanggung jawab, ketaatan, kejujuran, kerjasama, prakarsa, dan kepemimpinan.
 	Maka dari itu aplikasi ini akan menerapkan metode penilaian kinerja karyawan yang juga memperhatikan faktor-faktor lain dari hasil  pekerjaan karyawan yang kemudian dari hasil penilaian tersebut akan digunakan untuk memberikan penghargaan maupun sanksi.
 	Metode yang akan digunakan berdasarkan Peraturan Pemerintah 46 Tahun 2011 dengan menerapkan penilaian yang dibagi menjadi dua aspek antara lain SKP (Sasaran Kerja Pegawai) dan PKP (Perilaku Kerja Pegawai).
+	
+=== USER ===
+
+Terdapat 3 User :
+	1. Admin	-> uname : aldy; 	pass : aldy;
+	2. Penilai	-> uname : <NIP>; 	pass : penilai;
+	3. Atasan	-> uname : <NIP>; 	pass : atasan;
+
+	untuk NIP dapat dilihat dengan melakukan login sebagai Admin dan menuju ke panel Data Pegawai.
+	
+
